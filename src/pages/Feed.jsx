@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 function Feed() {
-  return <div>Feed</div>;
+  const { user } = useContext(UserContext);
+
+  return <div>Feed - {user.email}</div>;
 }
 
 export default Feed;

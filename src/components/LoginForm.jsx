@@ -1,7 +1,9 @@
 import axios from "axios";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { UserContext } from "../contexts/UserContext";
+import { toast } from "react-toastify";
 
 function LoginForm() {
   const {
@@ -10,18 +12,22 @@ function LoginForm() {
     reset,
     formState: { errors, isValid },
   } = useForm({ defaultValues: { email: "", password: "" }, mode: "onChange" });
-
+  const { logIn } = useContext(UserContext);
   const history = useHistory();
 
   function submitFn(formData) {
     axios
       .post("https://reqres.in/api/users", formData)
       .then((res) => {
-        console.log(res.data);
+        toast.success(`Merhaba ${res.data.email}. Tekrar hoş geldin....`);
+        logIn(res.data);
         reset();
         history.push("/feed");
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => {
+        toast.error(error.message, { position: "top-center" });
+        console.log(error.message);
+      });
   }
   return (
     <form
