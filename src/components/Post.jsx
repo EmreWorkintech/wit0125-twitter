@@ -14,7 +14,7 @@ function Post(props) {
   });
 
   return (
-    <div className="flex gap-4 justify-between items-start mb-4">
+    <div className="flex gap-4 justify-between items-start mb-6">
       <img src={item.avatar} className="rounded-full w-12" />
       <div className="w-full text-lg">
         <div className="font-bold">
