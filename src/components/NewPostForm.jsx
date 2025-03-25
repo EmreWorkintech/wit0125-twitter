@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import { usePostTweet } from "../services/mutations";
 
 function NewPostForm() {
   const { user } = useContext(UserContext);
@@ -13,24 +12,11 @@ function NewPostForm() {
     formState: { errors },
   } = useForm({ defaultValues: { post: "" }, mode: "onChange" });
 
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation({
-    mutationFn: (data) => {
-      return axios
-        .post("https://67e27bdb97fc65f535364c6e.mockapi.io/api/v1/tweets", data)
-        .then((response) => response.data);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["posts"],
-      });
-      reset();
-    },
-  });
+  const mutation = usePostTweet();
 
   function submitFn(formData) {
     mutation.mutate(formData);
+    reset();
   }
 
   return (

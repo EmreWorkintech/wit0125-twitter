@@ -7,3 +7,9 @@ export function getPosts() {
       return response.data;
     });
 }
+
+export function postTweet(data) {
+  return axios
+    .post("https://67e27bdb97fc65f535364c6e.mockapi.io/api/v1/tweets", data)
+    .then((response) => response.data);
+}
