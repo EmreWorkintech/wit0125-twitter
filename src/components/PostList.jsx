@@ -1,21 +1,10 @@
 import React from "react";
 import Post from "./Post";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { usePosts } from "../services/queries";
 
 function PostList() {
-  const { data, error, isPending } = useQuery({
-    queryKey: ["posts"],
-    queryFn: () => {
-      return axios
-        .get("https://67e27bdb97fc65f535364c6e.mockapi.io/api/v1/tweets")
-        .then((response) => {
-          return response.data;
-        });
-    },
-    staleTime: 10000,
-  });
+  const { data, error, isPending } = usePosts();
 
   if (isPending) return "Loading...";
   if (error) {
