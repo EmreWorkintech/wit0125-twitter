@@ -1,10 +1,16 @@
-import React, { useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
+import LeftColumn from "../layouts/LeftColumn";
+import MiddleColumn from "../layouts/MiddleColumn";
+
+import RightColumn from "../layouts/RightColumn";
 
 function Feed() {
-  const { user } = useContext(UserContext);
-
-  return <div>Feed - {user.email}</div>;
+  return (
+    <div className="flex w-2/3 mx-auto h-screen">
+      <LeftColumn />
+      <MiddleColumn />
+      <RightColumn />
+    </div>
+  );
 }
 
 export default Feed;

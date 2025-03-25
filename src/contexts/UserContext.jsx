@@ -9,6 +9,7 @@ export default function UserContextProvider({ children }) {
   function logIn(user) {
     setUser(user);
   }
+
   return (
     <UserContext.Provider value={{ user, logIn }}>
       {children}
