@@ -1,14 +1,15 @@
-import { FOLLOW_USER, UNFOLLOW_USER } from "../actions/followActions";
+import {
+  FOLLOW_USER,
+  GET_FOLLOWED_USERS_ERROR,
+  GET_FOLLOWED_USERS_LOADING,
+  GET_FOLLOWED_USERS_SUCCESS,
+  UNFOLLOW_USER,
+} from "../actions/followActions";
 
 const initialValue = {
-  followedUsers: [
-    {
-      name: "Emre Şahiner",
-      nickname: "emres",
-      avatar:
-        "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/33.jpg",
-    },
-  ],
+  followedUsers: [],
+  loading: false,
+  error: "",
 };
 
 //3. ilgili action için reducer'ına o case'i ekle.
@@ -25,6 +26,24 @@ export function followReducer(state = initialValue, action) {
         followedUsers: state.followedUsers.filter(
           (user) => user.id !== action.payload
         ),
+      };
+    case GET_FOLLOWED_USERS_LOADING:
+      console.log("loadin");
+      return { ...state, loading: true };
+    case GET_FOLLOWED_USERS_SUCCESS:
+      console.log("success");
+      return {
+        ...state,
+        followedUsers: action.payload,
+        loading: false,
+        error: "",
+      };
+    case GET_FOLLOWED_USERS_ERROR:
+      console.log("error");
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
       };
     default:
       return state;
