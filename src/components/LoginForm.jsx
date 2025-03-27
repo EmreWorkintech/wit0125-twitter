@@ -45,7 +45,11 @@ function LoginForm() {
         className="login-input"
         placeholder="Email Address"
       />
-      {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+      {errors.email && (
+        <p className="text-red-500" data-testid="error">
+          {errors.email.message}
+        </p>
+      )}
       <input
         {...register("password", {
           validate: (value) => value.length >= 8 || "En az 8 karakter yazınız.",
@@ -54,7 +58,9 @@ function LoginForm() {
         placeholder="Password"
       />
       {errors.password && (
-        <p className="text-red-500">{errors.password.message}</p>
+        <p className="text-red-500" data-testid="error">
+          {errors.password.message}
+        </p>
       )}
       <button
         disabled={!isValid}
