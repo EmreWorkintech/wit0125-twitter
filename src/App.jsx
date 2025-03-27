@@ -2,6 +2,7 @@ import "./App.css";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Feed from "./pages/Feed";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -13,9 +14,9 @@ function App() {
         <Route path="/login">
           <Login />
         </Route>
-        <Route path="/feed">
+        <ProtectedRoute path="/feed">
           <Feed />
-        </Route>
+        </ProtectedRoute>
       </Switch>
     </>
   );

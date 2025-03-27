@@ -1,5 +1,5 @@
-import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
+import { API } from "../../api";
 
 //1. action type constant oluştur çünkü typo çok yapıyoruz.
 export const FOLLOW_USER = "FOLLOW_USER";
@@ -31,8 +31,12 @@ export const getFollowedUsers = () => (dispatch) => {
     type: GET_FOLLOWED_USERS_LOADING,
   });
 
-  axios
-    .get("https://67e27bdb97fc65f535364c6e.mockapi.io/api/v1/login")
+  const token = localStorage.getItem("token");
+  API.get("login", {
+    headers: {
+      Authorization: token,
+    },
+  })
     .then((response) => {
       console.log("axios end success");
       dispatch({
